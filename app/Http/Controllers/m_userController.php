@@ -93,16 +93,61 @@ class m_userController extends Controller
 //
 //        return view('m_user', ['data' => $user]);
 
-        $user = m_userModel::firstOrNew(
+//        $user = m_userModel::firstOrNew(
+//            [
+//                'username' => 'manager23',
+//                'nama' => 'Manager Tiga Tiga',
+//                'password' => Hash::make('12345'),
+//                'level_id' => 2
+//            ],
+//        );
+//        $user->save();
+//
+//        return view('m_user', ['data' => $user]);
+
+//        $user = m_userModel::create(
+//            [
+//                'username' => 'manager55',
+//                'nama' => 'Manager55',
+//                'password' => Hash::make('12345'),
+//                'level_id' => 2,
+//            ]
+//        );
+//
+//        $user->username = 'manager56';
+//
+//        $user->isDirty();
+//        $user->isDirty('username');
+//        $user->isDIrty('nama');
+//        $user->isDirty(['nama', 'username']);
+//
+//        $user->isClean();
+//        $user->isClean('username');
+//        $user->isClean('nama');
+//        $user->isClean(['nama', 'username']);
+//
+//        $user->save();
+//
+//        $user->isDirty();
+//        $user->isClean();
+//        dd($user->isDirty());
+
+        $user = m_userModel::create(
             [
-                'username' => 'manager23',
-                'nama' => 'Manager Tiga Tiga',
+                'username' => 'manager55',
+                'nama' => 'Manager55',
                 'password' => Hash::make('12345'),
-                'level_id' => 2
-            ],
+                'level_id' => 2,
+            ]
         );
+
+        $user->username = 'manager12';
         $user->save();
 
-        return view('m_user', ['data' => $user]);
+        $user->wasChanged();
+        $user->wasChanged('username');
+        $user->wasChanged(['username', 'level_id']);
+        $user->wasChanged('nama');
+        dd($user->wasChanged(['nama', 'username']));
     }
 }
