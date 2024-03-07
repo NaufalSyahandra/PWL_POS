@@ -58,7 +58,11 @@ class m_userController extends Controller
 //        $user = m_userModel::findOrFail(1);
 //        return view('m_user', ['data' => $user]);
 
-        $user = m_userModel::where('username', 'manager9')->firstOrFail();
+//        $user = m_userModel::where('username', 'manager9')->firstOrFail();
+//        return view('m_user', ['data' => $user]);
+
+        $user = m_userModel::where('level_id', 2)->count();
+//        dd($user);
         return view('m_user', ['data' => $user]);
     }
 }
