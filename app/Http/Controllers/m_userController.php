@@ -61,8 +61,48 @@ class m_userController extends Controller
 //        $user = m_userModel::where('username', 'manager9')->firstOrFail();
 //        return view('m_user', ['data' => $user]);
 
-        $user = m_userModel::where('level_id', 2)->count();
-//        dd($user);
+//        $user = m_userModel::where('level_id', 2)->count();
+////        dd($user);
+//        return view('m_user', ['data' => $user]);
+
+//        $user = m_userModel::firstOrCreate(
+//            [
+//                'username' => 'manager',
+//                'nama' =>  'Manager',
+//            ],
+//        );
+//        return view('m_user', ['data' => $user]);
+
+//        $user = m_userModel::firstOrCreate(
+//            [
+//                'username' => 'manager22',
+//                'nama' => 'Manager Dua Dua',
+//                'password' => Hash::make('12345'),
+//                'level_id' => 2
+//            ],
+//        );
+//
+//        return view('m_user', ['data' => $user]);
+
+//        $user = m_userModel::firstOrNew(
+//            [
+//                'username' => 'manager',
+//                'nama' => 'Manager',
+//            ],
+//        );
+//
+//        return view('m_user', ['data' => $user]);
+
+        $user = m_userModel::firstOrNew(
+            [
+                'username' => 'manager23',
+                'nama' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],
+        );
+        $user->save();
+
         return view('m_user', ['data' => $user]);
     }
 }
