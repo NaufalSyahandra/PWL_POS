@@ -50,10 +50,15 @@ class m_userController extends Controller
 //        });
 //        return view('m_user', ['data' => $user]);
 
-        $user = m_userModel::findOr(20, ['username', 'nama'], function () {
-            abort(404);
-        });
-        return view('m_user', ['data' => $user]);
+//        $user = m_userModel::findOr(20, ['username', 'nama'], function () {
+//            abort(404);
+//        });
+//        return view('m_user', ['data' => $user]);
 
+//        $user = m_userModel::findOrFail(1);
+//        return view('m_user', ['data' => $user]);
+
+        $user = m_userModel::where('username', 'manager9')->firstOrFail();
+        return view('m_user', ['data' => $user]);
     }
 }
