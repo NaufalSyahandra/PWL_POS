@@ -22,4 +22,9 @@ Route::get('/', function () {
 
 Route::get('/level', [m_levelController::class, 'index']);
 Route::get('/kategori', [m_kategoriController::class, 'index']);
-Route::get('/user', [m_userController::class, 'index']);
+Route::get('/user', [m_userController::class, 'index'])->name('/user');
+Route::get('/user/tambah', [m_userController::class, 'tambah'])->name('/user/tambah');
+Route::get('/user/ubah/{id}', [m_userController::class, 'ubah'])->name('/user/ubah');
+Route::get('/user/hapus/{id}', [m_userController::class, 'hapus'])->name('/user/hapus');
+Route::post('/user/tambah_simpan', [m_userController::class, 'tambah_simpan'])->name('/user/tambah_simpan');
+Route::put('/user/ubah_simpan/{id}', [m_userController::class, 'ubah_simpan'])->name('/user/ubah_simpan');
