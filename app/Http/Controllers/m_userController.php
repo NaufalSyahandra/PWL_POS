@@ -153,7 +153,7 @@ class m_userController extends Controller
 
     public function index()
     {
-        $user = m_userModel::all();
+        $user = m_userModel::with('level')->get();
         return view('m_user', ['data' => $user]);
     }
 
