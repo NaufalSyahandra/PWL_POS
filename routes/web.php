@@ -28,3 +28,6 @@ Route::get('/user/ubah/{id}', [m_userController::class, 'ubah'])->name('/user/ub
 Route::get('/user/hapus/{id}', [m_userController::class, 'hapus'])->name('/user/hapus');
 Route::post('/user/tambah_simpan', [m_userController::class, 'tambah_simpan'])->name('/user/tambah_simpan');
 Route::put('/user/ubah_simpan/{id}', [m_userController::class, 'ubah_simpan'])->name('/user/ubah_simpan');
+Route::get('/kategori', [m_kategoriController::class, 'index']);
+
+
