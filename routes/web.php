@@ -31,4 +31,6 @@ Route::put('/user/ubah_simpan/{id}', [m_userController::class, 'ubah_simpan'])->
 Route::get('/kategori', [m_kategoriController::class, 'index']);
 Route::get('/kategori/create', [m_kategoriController::class, 'create'])->name('TambahKategori');
 Route::post('/kategori', [m_kategoriController::class, 'store']);
-
+Route::get('/kategori/edit/{id}', [m_kategoriController::class, 'edit'])->name('EditKategori');
+Route::put('/kategori/update/{id}', [m_kategoriController::class, 'update'])->name('UpdateKategori');
+Route::get('/kategori/delete/{id}', [m_kategoriController::class, 'delete'])->name('DeleteKategori');

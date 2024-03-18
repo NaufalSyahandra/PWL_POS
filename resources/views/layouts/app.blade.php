@@ -4,7 +4,9 @@
 
 @section('title')
     {{ config('adminlte.title') }}
-    @hasSection('subtitle') | @yield('subtitle') @endif
+    @hasSection('subtitle')
+        | @yield('subtitle')
+    @endif
 @stop
 
 @vite('resources/js/app.js')
@@ -53,7 +55,7 @@
 @endpush
 
 @stack('scripts')
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css"/>
 
 
 {{-- Add common CSS customizations --}}
@@ -61,13 +63,14 @@
 @push('css')
     <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
+
         /*
-        .card-header {
-        border-bottom: none;
-        }
-        .card-title {
-        font-weight: 600;
-        }
-        */
+                .card-header {
+                border-bottom: none;
+                }
+                .card-title {
+                font-weight: 600;
+                }
+                */
     </style>
 @endpush
