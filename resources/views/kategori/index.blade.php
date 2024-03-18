@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 {{--Customize layout sections--}}
 
@@ -9,9 +9,10 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header">Manage Category</div>
+            <div class="card-header">Manage Kategori</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
+                <a class="btn btn-success" href="{{route('TambahKategori')}}">Tambah Kategori</a>
             </div>
         </div>
     </div>

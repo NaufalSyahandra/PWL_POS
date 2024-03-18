@@ -133,7 +133,7 @@
 {{--</html>--}}
 
 
-@extends('layout.app')
+@extends('layouts.app')
 
 {{--Customize layout sections--}}
 
@@ -150,8 +150,8 @@
 {{--Push extra CSS--}}
 
 @push('css')
-{{--    Add here extra stylesheets--}}
-{{--    <link rel="stylesheet" href="/css/admin_custom.css">--}}
+    {{--    Add here extra stylesheets--}}
+    {{--    <link rel="stylesheet" href="/css/admin_custom.css">--}}
 @endpush
 
 {{--Push extra scripts--}}
