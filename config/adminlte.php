@@ -371,6 +371,11 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'category',
+            'url' => 'kategori',
+            'icon' => 'far fa-fw fa-file',
+        ],
         ['header' => 'labels'],
         [
             'text' => 'important',
