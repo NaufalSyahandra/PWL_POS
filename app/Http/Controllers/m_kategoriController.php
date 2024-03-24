@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\DataTables\KategoriDataTable;
 use App\Models\m_kategoriModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class m_kategoriController extends Controller
 {
@@ -39,16 +41,16 @@ class m_kategoriController extends Controller
         return $dataTable->render('kategori.index');
     }
 
-    public function create()
+    public function create(): view
     {
         return view('kategori.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        m_kategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori
+        $validated = $request->validate([
+            'kategori_kode' => 'bail|unique:m_kategori|required',
+            'kategori_nama' => 'bail|required|max:255'
         ]);
         return redirect('/kategori');
     }
