@@ -39,4 +39,5 @@ Route::get('/user/create', [m_userController::class, 'create'])->name('user.crea
 Route::get('/level/create', [m_levelController::class, 'create'])->name('level.create');
 
 Route::post('/kategori', [m_kategoriController::class, 'store']);
-
+Route::post('/user', [m_userController::class, 'store']);
+Route::post('/level', [m_levelController::class, 'store']);
