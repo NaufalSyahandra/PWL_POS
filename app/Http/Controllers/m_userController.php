@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\m_userModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class m_userController extends Controller
 {
@@ -151,10 +154,17 @@ class m_userController extends Controller
 //        dd($user->wasChanged(['nama', 'username']));
 //    }
 
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
-        $user = m_userModel::with('level')->get();
-        return view('m_user', ['data' => $user]);
+//        $user = m_userModel::with('level')->get();
+//        return view('m_user', ['data' => $user]);
+
+        return $dataTable->render('user.index');
+    }
+
+    public function create(): view
+    {
+        return view('user.create');
     }
 
     public function tambah()

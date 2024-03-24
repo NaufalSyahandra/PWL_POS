@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\LevelDataTable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class m_levelController extends Controller
 {
-    public function index()
+    public function index(LevelDataTable $dataTable)
     {
 //        DB::insert('insert into m_level(level_id, level_kode, level_nama, created_at) values(?, ?, ?, ?)', [4, 'CUS', 'Customer', now()]);
 //
@@ -19,7 +22,15 @@ class m_levelController extends Controller
 //        $row = DB::delete('delete from m_level where level_kode = ?', ['CUS']);
 //        return 'delete data berhasil. Jumlah data yang dihapus: ' . $row . ' baris';
 
-        $data = DB::select('select * from m_level');
-        return view('m_level', ['data' => $data]);
+//        $data = DB::select('select * from m_level');
+//        return view('m_level', ['data' => $data]);
+
+        return $dataTable->render('level.index');
     }
+
+    public function create(): view
+    {
+        return view('level.create');
+    }
+
 }
