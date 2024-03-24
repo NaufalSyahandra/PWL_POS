@@ -23,16 +23,20 @@ Route::get('/', function () {
 Route::get('/level', [m_levelController::class, 'index']);
 Route::get('/kategori', [m_kategoriController::class, 'index']);
 Route::get('/user', [m_userController::class, 'index'])->name('/user');
+
 Route::get('/user/tambah', [m_userController::class, 'tambah'])->name('/user/tambah');
 Route::get('/user/ubah/{id}', [m_userController::class, 'ubah'])->name('/user/ubah');
 Route::get('/user/hapus/{id}', [m_userController::class, 'hapus'])->name('/user/hapus');
 Route::post('/user/tambah_simpan', [m_userController::class, 'tambah_simpan'])->name('/user/tambah_simpan');
 Route::put('/user/ubah_simpan/{id}', [m_userController::class, 'ubah_simpan'])->name('/user/ubah_simpan');
-Route::get('/kategori', [m_kategoriController::class, 'index']);
+
 Route::get('/kategori/create', [m_kategoriController::class, 'create'])->name('TambahKategori');
-Route::post('/kategori', [m_kategoriController::class, 'store']);
 Route::get('/kategori/edit/{id}', [m_kategoriController::class, 'edit'])->name('EditKategori');
 Route::put('/kategori/update/{id}', [m_kategoriController::class, 'update'])->name('UpdateKategori');
 Route::get('/kategori/delete/{id}', [m_kategoriController::class, 'delete'])->name('DeleteKategori');
+
 Route::get('/user/create', [m_userController::class, 'create'])->name('user.create');
 Route::get('/level/create', [m_levelController::class, 'create'])->name('level.create');
+
+Route::post('/kategori', [m_kategoriController::class, 'store']);
+

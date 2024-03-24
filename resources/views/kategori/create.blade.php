@@ -13,8 +13,8 @@
             <div class="card-body">
                 <form method="post" action="../kategori">
                     <div class="form-group">
-                        <label for="kode_kategori">Kode Kategori</label>
-                        <input type="text" id="kode_kategori" name="kategori_kode"
+                        <label for="kategori_kode">Kode Kategori</label>
+                        <input type="text" id="kategori_kode" name="kategori_kode"
                                class="form-control @error('kategori_kode') is-invalid @enderror">
 
                         @error('kategori_kode')
@@ -23,8 +23,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="namaKategori">Kategori Nama</label>
-                        <input type="text" class="form-control" id="namaKategori" name="kategori_nama" placeholder="">
+                        <label for="kategori_nama">Kategori Nama</label>
+                        <input type="text" class="form-control @error('kategori_nama') is-invalid @enderror"
+                               id="kategori_nama" name="kategori_nama" placeholder="">
+
+                        @error('kategori_nama')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">

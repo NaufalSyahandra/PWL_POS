@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
+use App\Http\Requests\UserRequest;
 use App\Models\m_userModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -165,6 +166,25 @@ class m_userController extends Controller
     public function create(): view
     {
         return view('user.create');
+    }
+
+    public function store(UserRequest $request): RedirectResponse
+    {
+        /**
+         * The incoming request is valid...
+         */
+
+        /**
+         * Retrieve the validated input data...
+         */
+        $validated = $request->validated();
+
+        /**
+         * Retrieve a portion of the validated input data...
+         */
+        $validated = $request->safe()->only(['level_id', 'username', 'name', 'password']);
+
+        return redirect('/user');
     }
 
     public function tambah()

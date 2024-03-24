@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\KategoriDataTable;
+use App\Http\Requests\KategoriRequest;
 use App\Models\m_kategoriModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,17 +42,33 @@ class m_kategoriController extends Controller
         return $dataTable->render('kategori.index');
     }
 
-    public function create(): view
+    /**
+     * Show page kategori form
+     */
+    public function create(): View
     {
         return view('kategori.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    /**
+     * validate kategori form and store that in database
+     */
+    public function store(KategoriRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'kategori_kode' => 'bail|unique:m_kategori|required',
-            'kategori_nama' => 'bail|required|max:255'
-        ]);
+        /**
+         * The incoming request is valid...
+         */
+
+        /**
+         * Retrieve the validated input data...
+         */
+        $validated = $request->validated();
+
+        /**
+         * Retrieve a portion of the validated input data...
+         */
+        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
+
         return redirect('/kategori');
     }
 
