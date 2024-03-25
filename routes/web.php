@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/level', [m_levelController::class, 'index']);
 Route::get('/kategori', [m_kategoriController::class, 'index']);
-Route::get('/user', [m_userController::class, 'index'])->name('/user');
+Route::get('/user', [m_userController::class, 'index']);
 
 Route::get('/user/tambah', [m_userController::class, 'tambah'])->name('/user/tambah');
 Route::get('/user/ubah/{id}', [m_userController::class, 'ubah'])->name('/user/ubah');

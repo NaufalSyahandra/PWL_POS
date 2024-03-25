@@ -16,18 +16,18 @@
         <form method="post" action="../level">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Level Kode</label>
+                    <label for="level_kode">Level Kode</label>
                     <input type="text" name="level_kode" class="form-control @error('level_kode') is-invalid @enderror"
-                           id="exampleInputPassword1" placeholder="Input Level Kode">
+                           id="level_kode" placeholder="Input Level Kode">
 
                     @error('level_kode')
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Level Nama</label>
+                    <label for="level_nama">Level Nama</label>
                     <input type="text" name="level_nama" class="form-control @error('level_nama') is-invalid @enderror"
-                           id="exampleInputPassword1" placeholder="Input level Nama">
+                           id="level_nama" placeholder="Input level Nama">
 
                     @error('level_nama')
                     <div class="alert alert-danger">{{$message}}</div>
@@ -37,15 +37,6 @@
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
         </form>
     </div>
 @endsection

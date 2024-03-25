@@ -182,7 +182,15 @@ class m_userController extends Controller
         /**
          * Retrieve a portion of the validated input data...
          */
-        $validated = $request->safe()->only(['level_id', 'username', 'name', 'password']);
+
+        $validated = $request->safe()->only(['nama', 'password','level_id']);
+
+        m_userModel::create([
+            'username' => $request['username'],
+            'nama' => $validated['nama'],
+            'password' => $validated['password'],
+            'level_id' => $validated['level_id'],
+        ]);
 
         return redirect('/user');
     }

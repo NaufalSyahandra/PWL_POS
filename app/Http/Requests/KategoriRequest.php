@@ -22,7 +22,7 @@ class KategoriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kategori_kode' => 'required',
+            'kategori_kode' => 'bail|unique:m_kategori|required',
             'kategori_nama' => 'required'
         ];
     }

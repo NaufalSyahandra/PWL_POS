@@ -22,7 +22,8 @@ class LevelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'level_kode' => 'bail|unique:m_level|required',
+            'level_nama' => 'required'
         ];
     }
 }
