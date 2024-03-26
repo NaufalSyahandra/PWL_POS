@@ -25,8 +25,7 @@ class m_userSeeder extends Seeder
             [
                 'user_id' => 2,
                 'level_id' => 2,
-                'us
-                ername' => 'manager',
+                'username' => 'manager',
                 'nama' => 'Manager',
                 'password' => hash::make('12345'),
             ],

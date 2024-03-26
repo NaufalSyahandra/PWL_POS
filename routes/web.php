@@ -4,6 +4,7 @@ use App\Http\Controllers\m_kategoriController;
 use App\Http\Controllers\m_userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\m_levelController;
+use App\Http\Controllers\POSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::get('/level/create', [m_levelController::class, 'create'])->name('level.c
 Route::post('/kategori', [m_kategoriController::class, 'store']);
 Route::post('/user', [m_userController::class, 'store']);
 Route::post('/level', [m_levelController::class, 'store']);
+
+Route::resource('m_user', POSController::class);
