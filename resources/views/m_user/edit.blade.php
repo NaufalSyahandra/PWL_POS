@@ -43,7 +43,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Username:</strong>
-                    <input type="text" value="{{ $useri->username }}" class="form- control" name="username"
+                    <input type="text" value="{{ $useri->username }}" class="form-control" name="username"
                            placeholder="Masukkan Nomor username">
                 </div>
             </div>

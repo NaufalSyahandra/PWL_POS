@@ -44,3 +44,5 @@ Route::post('/user', [m_userController::class, 'store']);
 Route::post('/level', [m_levelController::class, 'store']);
 
 Route::resource('m_user', POSController::class);
+
+//Route::get('/m_user', [POSController::class, 'index']);

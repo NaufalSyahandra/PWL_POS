@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\m_userDataTable;
+use App\Models\m_levelModel;
 use App\Models\m_user;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,11 +14,12 @@ class POSController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): view
+    public function index(m_userDataTable $dataTable)
     {
-        //fungsi eloquent menampilkan data menggunakan pagination
-        $useri = m_user::all(); // Mengambil semua isi tabel
-        return view('m_user.index', compact('useri'));
+//        //fungsi eloquent menampilkan data menggunakan pagination
+//        $useri = m_user::all(); // Mengambil semua isi tabel
+//        return view('m_user.index', compact('useri'));
+        return $dataTable->render('m_user.index');
     }
 
     /**
@@ -24,7 +27,8 @@ class POSController extends Controller
      */
     public function create(): view
     {
-        return view('m_user.create');
+        $leveli = m_levelModel::all();
+        return view('m_user.create', compact('leveli'));
     }
 
     /**
@@ -37,6 +41,8 @@ class POSController extends Controller
             'user_id' => 'max 20',
             'username' => 'required',
             'nama' => 'required',
+            'password' => 'required',
+            'level_id' => 'bail|exists:m_level|required'
         ]);
 
         m_user::create($request->all());

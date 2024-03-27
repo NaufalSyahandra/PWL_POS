@@ -387,6 +387,11 @@ return [
             'url' => 'level',
             'icon' => 'far fa-fw fa-folder',
         ],
+        [
+            'text' => 'Manage m_user',
+            'url' => 'm_user',
+            'icon' => 'far fa-fw fa-folder',
+        ],
         ['header' => 'labels'],
         [
             'text' => 'important',
