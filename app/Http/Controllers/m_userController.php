@@ -56,12 +56,12 @@ class m_userController extends Controller
 
     public function create(): view
     {
-        $breadcrumb = (object) [
+        $breadcrumb = (object)[
             'title' => 'Tambah User',
             'list' => ['Home', 'User', 'Tambah']
         ];
 
-        $page = (object) [
+        $page = (object)[
             'title' => "Tambah User Baru"
         ];
 
@@ -88,6 +88,25 @@ class m_userController extends Controller
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
+    }
+
+    public function show(string $id)
+    {
+        $user = m_userModel::with('level')->find($id);
+
+        $breadcrumb = (object)[
+            'title' => 'Detail User',
+            'list' => ['Home', 'User', 'Detail']
+        ];
+
+        $page = (object)[
+            'title' => "Detail User"
+        ];
+
+        $activeMenu = 'user';
+
+        return view('user.show', ['breadcumb' => $breadcrumb, 'page' => $page, 'user' => $user,
+            'activeMenu' => $activeMenu]);
     }
 
     public function tambah()
