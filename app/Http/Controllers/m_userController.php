@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
 use App\Http\Requests\UserRequest;
+use App\Models\m_levelModel;
 use App\Models\m_userModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class m_userController extends Controller
 
     public function index()
     {
-        $breadcumb = (object)[
+        $breadcrumb = (object)[
             'title' => 'Daftar User',
             'list' => ['Home', 'User']
         ];
@@ -33,7 +34,7 @@ class m_userController extends Controller
         ];
 
         $activeMenu = 'user';
-        return view('user.index', ['breadcumb' => $breadcumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        return view('user.index', ['breadcumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
@@ -55,34 +56,38 @@ class m_userController extends Controller
 
     public function create(): view
     {
-        return view('user.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah User',
+            'list' => ['Home', 'User', 'Tambah']
+        ];
+
+        $page = (object) [
+            'title' => "Tambah User Baru"
+        ];
+
+        $level = m_levelModel::all();
+        $activeMenu = 'user';
+
+        return view('user.create', ['breadcumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     public function store(UserRequest $request): RedirectResponse
     {
-        /**
-         * The incoming request is valid...
-         */
-
-        /**
-         * Retrieve the validated input data...
-         */
-        $validated = $request->validated();
-
-        /**
-         * Retrieve a portion of the validated input data...
-         */
-
-        $validated = $request->safe()->only(['nama', 'password', 'level_id']);
-
-        m_userModel::create([
-            'username' => $request['username'],
-            'nama' => $validated['nama'],
-            'password' => $validated['password'],
-            'level_id' => $validated['level_id'],
+        $request->validate([
+            'username' => 'required|string|min:3|unique:m_user,username',
+            'nama' => 'required|string|max:100',
+            'password' => 'required|string|min:5',
+            'level_id' => 'required|integer'
         ]);
 
-        return redirect('/user');
+        m_userModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => bcrypt($request->password),
+            'level_id' => $request->level_id,
+        ]);
+
+        return redirect('/user')->with('success', 'Data user berhasil disimpan');
     }
 
     public function tambah()
