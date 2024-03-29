@@ -49,3 +49,14 @@ Route::resource('m_user', POSController::class);
 //Route::get('/m_user', [POSController::class, 'index']);
 
 Route::get('/', [WelcomeController::class, 'index']);
+
+Route::prefix('user')->group(function () {
+    Route::get('/', [m_userController::class, 'index']);
+    Route::post('/list', [m_userController::class, 'list']);
+    Route::get('/create', [m_userController::class, 'create']);
+    Route::post('/', [m_userController::class, 'store']);
+    Route::get('/{id}', [m_userController::class, 'show']);
+    Route::get('/{id}/edit', [m_userController::class, 'edit']);
+    Route::put('/{id}', [m_userController::class, 'update']);
+    Route::delete('/{id}', [m_userController::class, 'destroy']);
+});
