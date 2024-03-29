@@ -44,7 +44,7 @@ class m_userController extends Controller
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
-                $btn = '<a href="' . url('/user/' . $user->user_id) . '" class="btn btninfo btn-sm">Detail</a> ';
+                $btn = '<a href="' . url('/user/' . $user->user_id) . '" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="' . url('/user/' . $user->user_id . '/edit') . '"class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/user/' . $user->user_id) . '"> ' . csrf_field() . method_field('DELETE')
                     . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button></form>';
@@ -109,45 +109,42 @@ class m_userController extends Controller
             'activeMenu' => $activeMenu]);
     }
 
-    public function tambah()
+    public function edit(string $id)
     {
-        return view('m_user_tambah');
+        $user = m_userModel::find($id);
+        $level = m_levelModel::all();
+
+        $breadcrumb = (object)[
+            'title' => 'Edit User',
+            'list' => ['Home', 'User', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => "Edit User"
+        ];
+
+        $activeMenu = 'user';
+
+        return view('user.edit', ['breadcumb' => $breadcrumb, 'page' => $page, 'user' => $user,
+            'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    public function tambah_simpan(Request $request)
+    public function update(Request $request, string $id)
     {
-        m_userModel::create([
+        $request->validate([
+            'username' => 'required|string|min:3|unique:m_user,username,'. $id .',user_id',
+            'nama' => 'required|string|max:100',
+            'password' => 'nullable|string|min:5',
+            'level_id' => 'required|integer'
+        ]);
+
+        m_userModel::find($id)->update([
             'username' => $request->username,
             'nama' => $request->nama,
-            'password' => Hash::make($request->password),
+            'password' => $request->password ? bcrypt($request->password) : m_userModel::find($id)->password,
             'level_id' => $request->level_id,
         ]);
-        return redirect('/user');
-    }
 
-    public function ubah($id)
-    {
-        $user = m_userModel::find($id);
-        return view('m_user_ubah', ['data' => $user]);
-    }
-
-    public function ubah_simpan($id, Request $request)
-    {
-        $user = m_userModel::find($id);
-
-        $user->username = $request->username;
-        $user->nama = $request->nama;
-        $user->level_id = $request->level_id;
-
-        $user->save();
-        return redirect('/user');
-    }
-
-    public function hapus($id)
-    {
-        $user = m_userModel::find($id);
-        $user->delete();
-
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Data user berhasil diubah');
     }
 }
