@@ -5,6 +5,7 @@ use App\Http\Controllers\m_userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\m_levelController;
 use App\Http\Controllers\POSController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,5 @@ Route::post('/level', [m_levelController::class, 'store']);
 Route::resource('m_user', POSController::class);
 
 //Route::get('/m_user', [POSController::class, 'index']);
+
+Route::get('/', [WelcomeController::class, 'index']);
