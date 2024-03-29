@@ -132,7 +132,7 @@ class m_userController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'username' => 'required|string|min:3|unique:m_user,username,'. $id .',user_id',
+            'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100',
             'password' => 'nullable|string|min:5',
             'level_id' => 'required|integer'
@@ -146,5 +146,22 @@ class m_userController extends Controller
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
+    }
+
+    public function destroy(string $id)
+    {
+        $check = m_userModel::find($id);
+        if (!$check) {
+            return redirect('/user')->with('error', 'Data user tidak ditermukan');
+        }
+
+        try {
+            m_userModel::destroy($id);
+
+            return redirect('/user')->with('success', 'Data user berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            return redirect('/user')->with('error', 'Data user gagal dihapus, karena masih terdapat tabel lain yang terkait dengan data ini');
+        }
     }
 }
