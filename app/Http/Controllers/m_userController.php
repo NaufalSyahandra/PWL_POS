@@ -34,12 +34,19 @@ class m_userController extends Controller
         ];
 
         $activeMenu = 'user';
-        return view('user.index', ['breadcumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        $level = m_levelModel::all();
+
+        return view('user.index', ['breadcumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
     {
         $users = m_userModel::select('user_id', 'username', 'nama', 'level_id')->with('level');
+
+//        FIltering data
+        if ($request->level_id) {
+            $users->where('level_id', $request->level_id);
+        }
 
         return DataTables::of($users)
             ->addIndexColumn()
