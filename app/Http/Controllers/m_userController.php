@@ -36,7 +36,7 @@ class m_userController extends Controller
         $activeMenu = 'user';
         $level = m_levelModel::all();
 
-        return view('user.index', ['breadcumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
@@ -75,7 +75,7 @@ class m_userController extends Controller
         $level = m_levelModel::all();
         $activeMenu = 'user';
 
-        return view('user.create', ['breadcumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
+        return view('user.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     public function store(UserRequest $request): RedirectResponse
@@ -112,7 +112,7 @@ class m_userController extends Controller
 
         $activeMenu = 'user';
 
-        return view('user.show', ['breadcumb' => $breadcrumb, 'page' => $page, 'user' => $user,
+        return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user,
             'activeMenu' => $activeMenu]);
     }
 
@@ -132,7 +132,7 @@ class m_userController extends Controller
 
         $activeMenu = 'user';
 
-        return view('user.edit', ['breadcumb' => $breadcrumb, 'page' => $page, 'user' => $user,
+        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user,
             'level' => $level, 'activeMenu' => $activeMenu]);
     }
 

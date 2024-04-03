@@ -1,52 +1,45 @@
-@extends('layouts.app')
-
-{{--Customize layout sections--}}
-
-@section('subtitle', 'Kategori')
-@section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Create')
-
+@extends('layouts.template')
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">Buat Kategori baru</div>
-            <div class="card-body">
-                <form method="post" action="../kategori">
-                    <div class="form-group">
-                        <label for="kategori_kode">Kode Kategori</label>
-                        <input type="text" id="kategori_kode" name="kategori_kode"
-                               class="form-control @error('kategori_kode') is-invalid @enderror">
-
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools"></div>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url('kategori') }}" class="form-horizontal">
+                @csrf
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kategori Kode</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="kategori_kode" name="kategori_kode"
+                               value="{{ old('kategori_kode') }}" required>
                         @error('kategori_kode')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-
-                    <div class="form-group">
-                        <label for="kategori_nama">Kategori Nama</label>
-                        <input type="text" class="form-control @error('kategori_nama') is-invalid @enderror"
-                               id="kategori_nama" name="kategori_nama" placeholder="">
-
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kategori Nama</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="kategori_nama" name="kategori_nama"
+                               value="{{ old('kategori_nama') }}" required>
                         @error('kategori_nama')
-                        <div class="alert alert-danger">{{$message}}</div>
+                        <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a class="btn btn-secondary" href="{{url('/kategori')}}">Kembali</a>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"></label>
+                    <div class="col-11">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('kategori') }}">Kembali</a>
                     </div>
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
+@push('css')
+@endpush
+@push('js')
+@endpush
