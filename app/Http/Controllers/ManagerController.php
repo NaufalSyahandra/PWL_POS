@@ -8,6 +8,17 @@ class ManagerController extends Controller
 {
     public function index()
     {
-        return view('manager');
+        $breadcrumb = (object)[
+            'title' => 'Manager',
+            'list' => ['Home', 'Manager']
+        ];
+
+        $page = (object)[
+            'title' => 'Halo Manager'
+        ];
+
+        $activeMenu = 'manager';
+
+        return view('manager', compact('breadcrumb', 'page', 'activeMenu'));
     }
 }
