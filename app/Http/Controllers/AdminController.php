@@ -19,6 +19,6 @@ class AdminController extends Controller
 
         $activeMenu = 'admin';
 
-        return view('admin', compact('breadcrumb', $page, $activeMenu));
+        return view('admin', compact('breadcrumb', 'page', 'activeMenu'));
     }
 }

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as UserAuthenticate;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class m_userModel extends UserAuthenticate
+class m_userModel extends UserAuthenticate implements JWTSubject
 {
     use HasFactory;
 
@@ -20,5 +21,25 @@ class m_userModel extends UserAuthenticate
     public function level(): BelongsTo
     {
         return $this->belongsTo(m_levelModel::class, 'level_id', 'level_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier(): mixed
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
     }
 }
