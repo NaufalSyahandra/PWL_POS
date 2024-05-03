@@ -25,10 +25,11 @@ class UserRequest extends FormRequest
     {
         if (in_array($this->getMethod(), ['PUT', 'PATCH'])) {
             return [
-                'username' => 'bail|required_without_all:nama,password,level_id|unique:m_user',
-                'nama' => 'required_without_all:username,password,level_id',
-                'password' => 'required_without_all:username,nama,level_id',
-                'level_id' => 'required_without_all:username,nama,password',
+                'username' => 'bail|required_without_all:nama,password,level_id,image|unique:m_user',
+                'nama' => 'required_without_all:username,password,level_id,image',
+                'password' => 'required_without_all:username,nama,level_id,image',
+                'level_id' => 'required_without_all:username,nama,password,image',
+                'image' => 'required_without_all:username,nama,password,level_id'
             ];
         }
 
@@ -37,6 +38,7 @@ class UserRequest extends FormRequest
             'password' => 'required',
             'nama' => 'required',
             'level_id' => 'required',
+            'image' => 'required',
         ];
     }
 
