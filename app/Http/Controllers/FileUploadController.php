@@ -18,15 +18,12 @@ class FileUploadController extends Controller
         ]);
 
         $extFile = $request->berkas->getClientOriginalExtension();
+        $namaFileInput = $request->input('nama_file');
+        $namaFile = $namaFileInput . '.' . $extFile;
+        $path = $request->berkas->move('gambar', $namaFile);
+        $path = str_replace("\\", "//", $path);
+        $pathBaru = asset('gambar/' . $namaFile);
 
-        if (in_array(strtolower($extFile), ['jpg', 'jpeg', 'png'])) {
-            $namaFileInput = $request->input('nama_file');
-            $namaFile = $namaFileInput . '.' . $extFile;
-            $path = $request->berkas->move('gambar', $namaFile);
-            $path = str_replace("\\", "//", $path);
-            $pathBaru = asset('gambar/' . $namaFile);
-
-            return view('file-upload', ['pathBaru' => $pathBaru]);
-        }
+        return view('file-upload', ['pathBaru' => $pathBaru]);
     }
 }
