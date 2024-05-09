@@ -90,4 +90,3 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/file-upload', [FileUploadController::class,'fileUpload']);
 Route::post('/file-upload', [FileUploadController::class,'prosesFileUpload']);
-Route::get('/gambar', [FileUploadController::class, 'showGambar'])->name('gambar')->middleware('auth');
