@@ -6,6 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Http\Requests\UserRequest;
 use App\Models\m_levelModel;
 use App\Models\m_userModel;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +42,7 @@ class m_userController extends Controller
 
     public function list(Request $request)
     {
-        $users = m_userModel::select('user_id', 'username', 'nama', 'level_id')->with('level');
+        $users = m_userModel::select(['user_id', 'username', 'nama', 'level_id', 'image'])->with('level');
 
 //        FIltering data
         if ($request->level_id) {
@@ -80,19 +81,30 @@ class m_userController extends Controller
 
     public function store(UserRequest $request): RedirectResponse
     {
+        $request->merge([
+            'image' => $request->file('image')
+        ]);
+
         $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama' => 'required|string|max:100',
             'password' => 'required|string|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        $image = $request->file('image');
+        $fileName = $image->hashName();
+        $image->move(public_path('gambar'), $fileName);
 
         m_userModel::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => bcrypt($request->password),
             'level_id' => $request->level_id,
+            'image' => $fileName,
         ]);
+
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
     }
@@ -138,11 +150,16 @@ class m_userController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->merge([
+            'image' => $request->file('image')
+        ]);
+
         $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100',
             'password' => 'nullable|string|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         m_userModel::find($id)->update([
@@ -150,6 +167,7 @@ class m_userController extends Controller
             'nama' => $request->nama,
             'password' => $request->password ? bcrypt($request->password) : m_userModel::find($id)->password,
             'level_id' => $request->level_id,
+            'image' => updateImage($request->file('image')),
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');

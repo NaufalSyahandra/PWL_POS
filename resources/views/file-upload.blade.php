@@ -49,7 +49,7 @@
 <div class="image-container">
     @if(isset($pathBaru))
         <h3>Gambar yang Diunggah</h3>
-        <h5>Nama File: {{ basename($pathBaru) }}</h5>
+        <a href="{{ $pathBaru }}">Nama File: {{ basename($pathBaru) }}</a>
         <img src="{{ $pathBaru }}" alt="Gambar">
     @endif
 </div>

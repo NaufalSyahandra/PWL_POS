@@ -30,6 +30,14 @@
                         <td>{{ $barang->barang_nama }}</td>
                     </tr>
                     <tr>
+                        <th>Gambar Barang</th>
+                        @php
+                            $imageUrl = $barang->image_barang;
+                            $imageName = basename($imageUrl);
+                        @endphp
+                        <td><img src="{{ asset('gambar/' . $imageName) }}" class="img-thumbnail" alt="Gambar" width="50"></td>
+                    </tr>
+                    <tr>
                         <th>Harga Beli</th>
                         <td>Rp. {{ number_format($barang->harga_beli, 0, ',', '.') }},00</td>
                     </tr>

@@ -31,4 +31,9 @@ class m_barangModel extends Model
             get: fn($image) => url('/storage/img/' . $image),
         );
     }
+
+    public function getImageAttribute()
+    {
+        return asset('gambar/' . $this->attributes['image']);
+    }
 }

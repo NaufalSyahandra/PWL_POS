@@ -33,6 +33,14 @@
                         <th>Password</th>
                         <td>********</td>
                     </tr>
+                    <tr>
+                        <th>Gambar</th>
+                        @php
+                            $imageUrl = $user->image;
+                            $imageName = basename($imageUrl);
+                        @endphp
+                        <td><img src="{{ asset('gambar/' . $imageName) }}" class="img-thumbnail" alt="Gambar" width="50"></td>
+                    </tr>
                 </table>
             @endempty
             <a href="{{ url('user') }}" class="btn btn-sm btn-default mt2">Kembali</a>

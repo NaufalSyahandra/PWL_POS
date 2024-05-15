@@ -33,8 +33,8 @@ class m_barangController extends Controller
 
     public function list(Request $request)
     {
-        $barangs = m_barangModel::select('barang_id', 'barang_kode', 'barang_nama',
-            'harga_beli', 'harga_jual', 'kategori_id')->with('kategori');
+        $barangs = m_barangModel::select(['barang_id', 'barang_kode', 'barang_nama',
+            'harga_beli', 'harga_jual', 'kategori_id', 'image_barang'])->with('kategori');
 
 //        FIltering data
         if ($request->kategori_id) {
@@ -74,13 +74,22 @@ class m_barangController extends Controller
 
     public function store(BarangRequest $request): RedirectResponse
     {
+        $request->merge([
+            'image_barang' => $request->file('image_barang')
+        ]);
+
         $request->validate([
             'barang_kode' => 'required|string|min:3|unique:m_barang,barang_kode',
             'barang_nama' => 'required|string|max:100',
             'harga_beli' => 'required|integer',
             'harga_jual' => 'required|integer',
-            'kategori_id' => 'required|integer'
+            'kategori_id' => 'required|integer',
+            'image_barang' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        $image = $request->file('image_barang');
+        $fileName = $image->hashName();
+        $image->move(public_path('gambar'), $fileName);
 
         m_barangModel::create([
             'barang_kode' => $request->barang_kode,
@@ -88,6 +97,7 @@ class m_barangController extends Controller
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
             'kategori_id' => $request->kategori_id,
+            'image_barang' => $fileName,
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil disimpan');

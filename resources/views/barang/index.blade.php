@@ -39,6 +39,7 @@
                     <th>Kode Barang</th>
                     <th>Nama Kategori</th>
                     <th>Nama Barang</th>
+                    <th>Image Barang</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
                     <th>Aksi</th>
@@ -84,6 +85,18 @@
                         className: "",
                         orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                         searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                    },{
+                        data: "image_barang",
+                        className: "text-center",
+                        orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
+                        searchable: true, // searchable: true, jika ingin kolom ini bisa dicari
+                        render: function (data) {
+                            if (data) {
+                                return `<img src="${data}" class="img-thumbnail" alt="Gambar" width="50">`;
+                            } else {
+                                return '<span>No image found!</span>'
+                            }
+                        }
                     },{
                         data: "harga_beli",
                         className: "",

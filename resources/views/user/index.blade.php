@@ -39,6 +39,7 @@
                     <th>Username</th>
                     <th>Nama</th>
                     <th>Level Pengguna</th>
+                    <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -82,6 +83,18 @@
                         className: "",
                         orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
                         searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                    }, {
+                        data: "image",
+                        className: "text-center",
+                        orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                        searchable: false, // searchable: true, jika ingin kolom ini bisa dicari
+                        render: function (data) {
+                            if (data) {
+                                return `<img src="${data}" class="img-thumbnail" alt="Gambar" width="50">`;
+                            } else {
+                                return '<span>No image found!</span>'
+                            }
+                        }
                     }, {
                         data: "aksi",
                         className: "",
